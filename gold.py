@@ -84,7 +84,7 @@ def add_data(mydb, cursor, data):
 
 def mail_sender(up_dt, gm_lr, gm_pr, pv_lr, pv_pr, diff, stat):
 	sender_email = "esskayrengan@gmail.com"
-	receiver_email = "sabukittu@gmail.com"
+	receiver_email = "\n   Enter The Mail ADDRESS: "
 #	password = getpass.getpass()
 	password = 'redhat123'
 
@@ -151,10 +151,4 @@ def mail_sender(up_dt, gm_lr, gm_pr, pv_lr, pv_pr, diff, stat):
 
 add_data(mydb, cursor, data)
 mail_sender(up_dt, gm_lr, gm_pr, pv_lr, pv_pr, diff, stat)
-
-
-
-
-
-
 
