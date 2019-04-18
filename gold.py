@@ -30,8 +30,12 @@ def get_api_req():
 
 ## These 2 line of code is using to establish a connection 
 ## with the database.
-mydb = mysql.connector.connect(host='localhost', database='gold_rate', user='root', password='redhat')
-cursor = mydb.cursor()
+try:
+	mydb = mysql.connector.connect(host='localhost', database='gold_rate', user='root', password='redhat')
+	cursor = mydb.cursor()
+except Exception as e:
+	print("\n\033[1;31;40m"+(str(e))+"\033[1;0;40m\n")
+	exit(1)
 
 
 ## db_query() function is used to query the details from database gold_rate
