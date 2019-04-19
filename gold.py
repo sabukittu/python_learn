@@ -38,6 +38,28 @@ except Exception as e:
 	exit(1)
 
 
+## add_data() function is using to insert the data to database gold_rate
+## the values are fetched from api_get_req()
+def add_data(mydb, cursor, data):
+
+	z = []
+	z.append(data["usd_to_inr"])
+	z.append(data["gram_in_inr"])
+	z.append(data["gmt_inr_updated"])
+	lis = (tuple(z))
+
+	try:
+		add = ("INSERT INTO RateINR "
+				"(USDtoINR, GraminINR, UpdateTime, CurrentDate, CurrentTime) "
+				"VALUES (%s, %s, %s, CURDATE(), CURTIME())")
+		cursor.execute(add, lis)
+		resp = mydb.commit() 
+	except Exception as e:
+		resp = 'Database is upto Date'
+
+	return resp
+
+
 ## db_query() function is used to query the details from database gold_rate
 ## the return 'd' value will be dict contain list
 def db_query(cursor):
@@ -86,29 +108,6 @@ pv_pr = (round((float(a['calc'][1])),2))
 
 diff = (round((float(a['calc'][2])),2))
 stat = (a['calc'][3])
-
-
-## add_data() function is using to insert the data to database gold_rate
-## the values are fetched from api_get_req()
-def add_data(mydb, cursor, data):
-
-	z = []
-	z.append(data["usd_to_inr"])
-	z.append(data["gram_in_inr"])
-	z.append(data["gmt_inr_updated"])
-	lis = (tuple(z))
-
-	try:
-		add = ("INSERT INTO RateINR "
-				"(USDtoINR, GraminINR, UpdateTime, CurrentDate, CurrentTime) "
-				"VALUES (%s, %s, %s, CURDATE(), CURTIME())")
-		cursor.execute(add, lis)
-		resp = mydb.commit() 
-	except Exception as e:
-		resp = 'Database is upto Date'
-
-	return resp
-
 
 
 ## mail_sender() function is using to send a mail with the current 
