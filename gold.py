@@ -59,6 +59,9 @@ def add_data(mydb, cursor, data):
 
 	return resp
 
+## Main Execution of the script, adding data to DB.
+data = get_api_req()
+add_data(mydb, cursor, data)
 
 ## db_query() function is used to query the details from database gold_rate
 ## the return 'd' value will be dict contain list
@@ -96,7 +99,6 @@ def db_query(cursor):
 
 ## These are the values of rates fetched from
 ## db_query() function 
-data = get_api_req()
 a = db_query(cursor)
 
 cu_dt = (a['latest'][3])
@@ -186,9 +188,6 @@ def mail_sender(up_dt, gm_lr, gm_pr, pv_lr, pv_pr, diff, stat):
 	return resp 
 
 
-
-## Main Execution of the script, adding data to DB and
 ## Sending the composed mail
-add_data(mydb, cursor, data)
 mail_sender(up_dt, gm_lr, gm_pr, pv_lr, pv_pr, diff, stat)
 
